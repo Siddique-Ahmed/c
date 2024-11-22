@@ -15,7 +15,7 @@ const UpdateTopicsForm = (id) => {
   }, []);
 
   const getData = async (id) => {
-    let data = await fetch(`http://localhost:3000/api/topics/${id}`);
+    let data = await fetch(`https://crud-app-one-pi.vercel.app/${id}`);
     data = await data.json();
     let topic = data.result;
     setUpdateTitle(topic.title);
@@ -24,13 +24,16 @@ const UpdateTopicsForm = (id) => {
 
   const handleUpdateTopic = async (e) => {
     e.preventDefault();
-    const data = await fetch(`http://localhost:3000/api/topics/${updataId}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        title,
-        description,
-      }),
-    });
+    const data = await fetch(
+      `https://crud-app-one-pi.vercel.app/api/topics/${updataId}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          title,
+          description,
+        }),
+      }
+    );
     if (data) {
       router.push("/");
     }

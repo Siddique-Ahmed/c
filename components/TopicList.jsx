@@ -12,7 +12,7 @@ const TopicList = () => {
     getData();
   }, []);
   const getData = async () => {
-    let data = await fetch("http://localhost:3000/api/topics", {
+    let data = await fetch("https://crud-app-one-pi.vercel.app/api/topics", {
       cache: "no-store",
     });
     if (data) {
@@ -23,9 +23,12 @@ const TopicList = () => {
   };
 
   const handleDelete = async (id) => {
-    const data = await fetch(`http://localhost:3000/api/topics/${id}`, {
-      method: "DELETE",
-    });
+    const data = await fetch(
+      `https://crud-app-one-pi.vercel.app/api/topics/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
     if (data.ok) {
       setTopics((prevTopics) => ({
         ...prevTopics,
