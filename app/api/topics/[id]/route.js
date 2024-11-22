@@ -30,6 +30,33 @@ export async function PUT(request, { params }) {
   }
 }
 
+export async function GET(request, { params }) {
+  const { id } = params;
+
+  await connectDatabase();
+  try {
+    const data = await topicModel.findOne({_id : id});
+    if (!data) {
+      return NextResponse.json(
+        { msg: "something went wrong", success: false },
+        { status: 401 }
+      );
+    } else {
+      return NextResponse.json(
+        { result: data, success: true },
+        { status: 201 }
+      );
+    }
+  } catch (error) {
+    console.log(error);
+    
+    return NextResponse.json(
+      { msg: "data fetched failed", success: false },
+      { status: 401 }
+    );
+  }
+}
+
 export async function DELETE(request, { params }) {
   const { id } = params;
   await connectDatabase();

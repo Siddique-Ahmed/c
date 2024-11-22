@@ -4,12 +4,10 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
   let data = await request.json();
-  console.log("data after json==>>", data);
-
+  
   await connectDatabase();
   try {
     const dataa = await topicModel.create(data);
-    console.log("check Data=>",dataa);
     return NextResponse.json(
       {
         dataa,
