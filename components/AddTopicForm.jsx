@@ -9,6 +9,10 @@ const AddTopicForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const router = useRouter();
+  const URL =
+    process.env.NODE_ENV === "development"
+      ? process.env.LOCAL
+      : process.env.NEXT_PUBLIC_API_URL;
 
   const handleAddData = async (e) => {
     e.preventDefault();
@@ -16,7 +20,7 @@ const AddTopicForm = () => {
 
     button.innerHTML = "Loading...";
     button.disabled = true;
-    const data = await fetch("https://crud-app-one-pi.vercel.app/api/topics", {
+    const data = await fetch(URL, {
       method: "POST",
       body: JSON.stringify({ title, description }),
     });

@@ -7,12 +7,15 @@ import { redirect, useRouter } from "next/navigation";
 const TopicList = () => {
   const [topics, setTopics] = useState([]);
   const router = useRouter();
+  process.env.NODE_ENV === "development"
+  ? process.env.LOCAL
+  : process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     getData();
   }, []);
   const getData = async () => {
-    let data = await fetch("https://crud-app-one-pi.vercel.app/api/topics", {
+    let data = await fetch(URL, {
       cache: "no-store",
     });
     if (data) {
@@ -24,7 +27,7 @@ const TopicList = () => {
 
   const handleDelete = async (id) => {
     const data = await fetch(
-      `https://crud-app-one-pi.vercel.app/api/topics/${id}`,
+      `${URL}/${id}`,
       {
         method: "DELETE",
       }
